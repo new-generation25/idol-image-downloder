@@ -570,15 +570,6 @@ export default function Home() {
               <div style={{ fontSize: "14px", color: "#666" }}>{idol2.group}</div>
             </div>
           </div>
-          <span className="hidden sm:block" style={{
-            gridColumn: "1 / span 2",
-            textAlign: "center",
-            fontWeight: 700,
-            fontSize: 22,
-            color: "#764ba2",
-            letterSpacing: 2,
-            margin: "0 0 8px 0"
-          }}>vs</span> {/* PC: 두 사진 사이 */}
           <button
             onClick={restartGame}
             style={{
