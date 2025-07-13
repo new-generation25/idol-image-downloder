@@ -448,8 +448,8 @@ export default function Home() {
           <div style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "40px",
-            marginBottom: "30px"
+            gap: "16px",
+            marginBottom: "20px"
           }}>
             {[idol1, idol2].map((idol, idx) => (
               <div
@@ -457,11 +457,13 @@ export default function Home() {
                 onClick={() => selectWinner(idol)}
                 style={{
                   cursor: "pointer",
-                  padding: "20px",
-                  borderRadius: "16px",
-                  border: "3px solid transparent",
+                  padding: "10px",
+                  borderRadius: "12px",
+                  border: "2px solid transparent",
                   transition: "all 0.3s ease",
-                  background: "#f8f9fa"
+                  background: "#f8f9fa",
+                  maxWidth: 220,
+                  margin: "0 auto"
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.borderColor = "#667eea";
@@ -473,19 +475,19 @@ export default function Home() {
                 }}
               >
                 <div style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "50%",
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "16px",
                   overflow: "hidden",
-                  margin: "0 auto 20px",
-                  border: "4px solid #667eea",
+                  margin: "0 auto 12px",
+                  border: "3px solid #667eea",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   background: "#fff"
                 }}>
                   {loadingImages ? (
-                    <span style={{fontSize: 24, color: "#aaa"}}>로딩중...</span>
+                    <span style={{fontSize: 18, color: "#aaa"}}>로딩중...</span>
                   ) : (
                     <img
                       src={currentImages[idx]}
@@ -495,12 +497,10 @@ export default function Home() {
                     />
                   )}
                 </div>
-                <h3 style={{ fontSize: "24px", fontWeight: "bold", color: "#333", marginBottom: "8px" }}>
+                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "#333", marginBottom: "6px" }}>
                   {idol.name}
                 </h3>
-                <p style={{ fontSize: "16px", color: "#666" }}>
-                  {idol.group}
-                </p>
+                <div style={{ fontSize: "14px", color: "#666" }}>{idol.group}</div>
               </div>
             ))}
           </div>
