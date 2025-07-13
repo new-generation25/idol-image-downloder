@@ -449,61 +449,135 @@ export default function Home() {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: "16px",
-            marginBottom: "20px"
+            marginBottom: "20px",
+            alignItems: "center"
           }}>
-            {[idol1, idol2].map((idol, idx) => (
-              <div
-                key={idol.id}
-                onClick={() => selectWinner(idol)}
-                style={{
-                  cursor: "pointer",
-                  padding: "10px",
-                  borderRadius: "12px",
-                  border: "2px solid transparent",
-                  transition: "all 0.3s ease",
-                  background: "#f8f9fa",
-                  maxWidth: 220,
-                  margin: "0 auto"
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "#667eea";
-                  e.currentTarget.style.transform = "scale(1.02)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "transparent";
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              >
-                <div style={{
-                  width: "150px",
-                  height: "150px",
-                  borderRadius: "16px",
-                  overflow: "hidden",
-                  margin: "0 auto 12px",
-                  border: "3px solid #667eea",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "#fff"
-                }}>
-                  {loadingImages ? (
-                    <span style={{fontSize: 18, color: "#aaa"}}>로딩중...</span>
-                  ) : (
-                    <img
-                      src={currentImages[idx]}
-                      alt={idol.name}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                      onError={e => { e.currentTarget.src = "/no-image.png"; }}
-                    />
-                  )}
-                </div>
-                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "#333", marginBottom: "6px" }}>
-                  {idol.name}
-                </h3>
-                <div style={{ fontSize: "14px", color: "#666" }}>{idol.group}</div>
+            {/* 왼쪽 카드 */}
+            <div
+              key={idol1.id}
+              onClick={() => selectWinner(idol1)}
+              style={{
+                cursor: "pointer",
+                padding: "10px",
+                borderRadius: "12px",
+                border: "2px solid transparent",
+                transition: "all 0.3s ease",
+                background: "#f8f9fa",
+                maxWidth: 220,
+                margin: "0 auto"
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = "#667eea";
+                e.currentTarget.style.transform = "scale(1.02)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = "transparent";
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              <div style={{
+                width: "150px",
+                height: "150px",
+                borderRadius: "16px",
+                overflow: "hidden",
+                margin: "0 auto 12px",
+                border: "3px solid #667eea",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#fff"
+              }}>
+                {loadingImages ? (
+                  <span style={{fontSize: 18, color: "#aaa"}}>로딩중...</span>
+                ) : (
+                  <img
+                    src={currentImages[0]}
+                    alt={idol1.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    onError={e => { e.currentTarget.src = "/no-image.png"; }}
+                  />
+                )}
               </div>
-            ))}
+              <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "#333", marginBottom: "6px" }}>
+                {idol1.name}
+              </h3>
+              <div style={{ fontSize: "14px", color: "#666" }}>{idol1.group}</div>
+            </div>
+            {/* vs 표기 */}
+            <div style={{
+              gridColumn: "1 / span 2",
+              textAlign: "center",
+              margin: "-12px 0 8px 0",
+              fontWeight: 700,
+              fontSize: 22,
+              color: "#764ba2",
+              letterSpacing: 2,
+              zIndex: 1,
+              position: "relative"
+            }}>
+              <span className="block sm:hidden">vs</span> {/* 모바일: 두 사진 사이 윗부분 */}
+            </div>
+            {/* 오른쪽 카드 */}
+            <div
+              key={idol2.id}
+              onClick={() => selectWinner(idol2)}
+              style={{
+                cursor: "pointer",
+                padding: "10px",
+                borderRadius: "12px",
+                border: "2px solid transparent",
+                transition: "all 0.3s ease",
+                background: "#f8f9fa",
+                maxWidth: 220,
+                margin: "0 auto"
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = "#667eea";
+                e.currentTarget.style.transform = "scale(1.02)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = "transparent";
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              <div style={{
+                width: "150px",
+                height: "150px",
+                borderRadius: "16px",
+                overflow: "hidden",
+                margin: "0 auto 12px",
+                border: "3px solid #667eea",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#fff"
+              }}>
+                {loadingImages ? (
+                  <span style={{fontSize: 18, color: "#aaa"}}>로딩중...</span>
+                ) : (
+                  <img
+                    src={currentImages[1]}
+                    alt={idol2.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    onError={e => { e.currentTarget.src = "/no-image.png"; }}
+                  />
+                )}
+              </div>
+              <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "#333", marginBottom: "6px" }}>
+                {idol2.name}
+              </h3>
+              <div style={{ fontSize: "14px", color: "#666" }}>{idol2.group}</div>
+            </div>
           </div>
+          <span className="hidden sm:block" style={{
+            gridColumn: "1 / span 2",
+            textAlign: "center",
+            fontWeight: 700,
+            fontSize: 22,
+            color: "#764ba2",
+            letterSpacing: 2,
+            margin: "0 0 8px 0"
+          }}>vs</span> {/* PC: 두 사진 사이 */}
           <button
             onClick={restartGame}
             style={{
@@ -550,7 +624,7 @@ export default function Home() {
         {/* 선택된 그룹 상단 표시 */}
         {selectedGroups.length > 0 && (
           <div style={{
-            marginBottom: "18px",
+            marginBottom: "24px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -563,39 +637,7 @@ export default function Home() {
               selectedGroups
                 .map(gid => groups.find(g => g.id === gid)?.members.length || 0)
                 .reduce((a, b) => a + b, 0)
-            }명)
-          </div>
-        )}
-
-        {/* 선택된 그룹 리스트 */}
-        {selectedGroups.length > 0 && (
-          <div style={{
-            marginBottom: "20px",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "12px",
-            alignItems: "center",
-            justifyContent: "center"
-          }}>
-            {selectedGroups.map(groupId => {
-              const group = groups.find(g => g.id === groupId);
-              if (!group) return null;
-              return (
-                <div key={group.id} style={{
-                  border: "1.5px solid #667eea",
-                  borderRadius: "8px",
-                  padding: "6px 18px",
-                  background: "#f0f4ff",
-                  color: "#667eea",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  display: "flex",
-                  alignItems: "center"
-                }}>
-                  {group.name} <span style={{marginLeft: 6, fontSize: 14, color: "#333"}}>(참가 인원 {group.members.length}명)</span>
-                </div>
-              );
-            })}
+            }명) 선택됨
           </div>
         )}
 
