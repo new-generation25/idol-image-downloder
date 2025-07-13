@@ -446,11 +446,12 @@ export default function Home() {
             </div>
           </div>
           <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
             gap: "16px",
-            marginBottom: "20px",
-            alignItems: "center"
+            marginBottom: "20px"
           }}>
             {/* 왼쪽 카드 */}
             <div
@@ -505,17 +506,17 @@ export default function Home() {
             </div>
             {/* vs 표기 */}
             <div style={{
-              gridColumn: "1 / span 2",
-              textAlign: "center",
-              margin: "-12px 0 8px 0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+              minWidth: 40,
               fontWeight: 700,
-              fontSize: 22,
+              fontSize: 24,
               color: "#764ba2",
-              letterSpacing: 2,
-              zIndex: 1,
-              position: "relative"
+              letterSpacing: 2
             }}>
-              <span className="block sm:hidden">vs</span> {/* 모바일: 두 사진 사이 윗부분 */}
+              vs
             </div>
             {/* 오른쪽 카드 */}
             <div
