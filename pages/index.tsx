@@ -445,6 +445,18 @@ export default function Home() {
               }} />
             </div>
           </div>
+          {/* vs 표기 - 카드 위쪽 중앙 */}
+          <div style={{
+            width: "100%",
+            textAlign: "center",
+            fontWeight: 700,
+            fontSize: 24,
+            color: "#764ba2",
+            letterSpacing: 2,
+            marginBottom: "8px"
+          }}>
+            vs
+          </div>
           <div style={{
             display: "flex",
             flexDirection: "row",
@@ -503,20 +515,6 @@ export default function Home() {
                 {idol1.name}
               </h3>
               <div style={{ fontSize: "14px", color: "#666" }}>{idol1.group}</div>
-            </div>
-            {/* vs 표기 */}
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-              minWidth: 40,
-              fontWeight: 700,
-              fontSize: 24,
-              color: "#764ba2",
-              letterSpacing: 2
-            }}>
-              vs
             </div>
             {/* 오른쪽 카드 */}
             <div
