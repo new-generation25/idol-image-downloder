@@ -232,26 +232,49 @@ export default function Home() {
       return;
     }
 
-    // 선택된 그룹의 모든 멤버를 가져와서 섞기
-    const allMembers: Idol[] = [];
-    selectedGroups.forEach(groupId => {
-      const group = groups.find(g => g.id === groupId);
-      if (group) {
-        allMembers.push(...group.members);
-      }
+    // 선택된 그룹의 모든 멤버를 가져옴
+    const selectedGroupObjs = selectedGroups.map(groupId => groups.find(g => g.id === groupId)).filter(Boolean) as Group[];
+    let allMembers: Idol[] = [];
+    selectedGroupObjs.forEach(group => {
+      allMembers.push(...group.members);
     });
 
     // 64명으로 맞추기 (부족하면 반복, 많으면 잘라내기)
     let tournamentMembers: Idol[] = [];
     while (tournamentMembers.length < 64) {
-      tournamentMembers.push(...allMembers);
+      // 그룹별로 한 명씩 뽑아 분산 배치
+      let added = false;
+      for (const group of selectedGroupObjs) {
+        const remain = allMembers.filter(m => m.group === group.name && !tournamentMembers.includes(m));
+        if (remain.length > 0) {
+          tournamentMembers.push(remain[0]);
+          added = true;
+          if (tournamentMembers.length >= 64) break;
+        }
+      }
+      // 만약 모든 그룹에서 더 이상 뽑을 멤버가 없으면, 다시 전체에서 랜덤하게 채움
+      if (!added && tournamentMembers.length < 64) {
+        const left = allMembers.filter(m => !tournamentMembers.includes(m));
+        if (left.length === 0) break;
+        for (const m of left) {
+          tournamentMembers.push(m);
+          if (tournamentMembers.length >= 64) break;
+        }
+      }
     }
     tournamentMembers = tournamentMembers.slice(0, 64);
 
-    // 랜덤 섞기
-    for (let i = tournamentMembers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [tournamentMembers[i], tournamentMembers[j]] = [tournamentMembers[j], tournamentMembers[i]];
+    // 1라운드에서 같은 그룹끼리 붙지 않도록, 인접한 두 명이 같은 그룹이면 한 칸씩 뒤로 미는 로직
+    for (let i = 0; i < tournamentMembers.length - 1; i += 2) {
+      if (tournamentMembers[i].group === tournamentMembers[i + 1].group) {
+        // 뒤쪽에서 다른 그룹을 찾아서 swap
+        for (let j = i + 2; j < tournamentMembers.length; j++) {
+          if (tournamentMembers[j].group !== tournamentMembers[i].group) {
+            [tournamentMembers[i + 1], tournamentMembers[j]] = [tournamentMembers[j], tournamentMembers[i + 1]];
+            break;
+          }
+        }
+      }
     }
 
     setTournament(tournamentMembers);
